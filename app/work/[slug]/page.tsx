@@ -5,18 +5,17 @@ import Navigation from "../../../components/Navigation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projectsData } from "../../../lib/projects";
+// Next.js standard image component for optimization
+import Image from "next/image";
 import { use } from "react";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
-  // 1. Find the current project based on the URL slug
   const projectIndex = projectsData.findIndex(p => p.slug === resolvedParams.slug);
   const project = projectsData[projectIndex];
 
-  // 2. If the slug doesn't exist in our data file, show a 404 page
   if (!project) return notFound();
 
-  // 3. Figure out the next project (loop back to the first if we are on the last one)
   const nextProjectIndex = (projectIndex + 1) % projectsData.length;
   const nextProject = projectsData[nextProjectIndex];
 
@@ -40,15 +39,19 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
              </h1>
            </motion.div>
 
-           {/* Hero Image - Will use standard HTML img until real Next.js Image component is needed */}
+           {/* REAL IMAGE RENDERING HERE */}
            <motion.div 
              initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 1 }}
-             className="w-full aspect-video bg-xpandify-green/5 flex items-center justify-center border border-xpandify-green/10 relative overflow-hidden"
+             className="w-full aspect-video bg-xpandify-green/5 flex items-center justify-center border border-xpandify-green/10 relative overflow-hidden group"
            >
-              {/* <img src={project.heroImage} alt={project.title} className="object-cover w-full h-full" /> */}
-              <span className="text-xpandify-green/20 font-light tracking-widest uppercase relative z-10">
-                Replace with &lt;img src=&quot;{project.heroImage}&quot; /&gt;
-              </span>
+              {/* If the image exists in the public folder, Next/Image will render it perfectly */}
+              <Image 
+                src={project.heroImage} 
+                alt={project.title} 
+                fill 
+                priority 
+                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105" 
+              />
            </motion.div>
         </div>
       </section>
