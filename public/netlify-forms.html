@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Netlify Forms Proxy</title>
+  </head>
+  <body>
+    <!-- A hidden static form for Netlify's build bots to parse at deploy time -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <textarea name="project"></textarea>
+    </form>
+  </body>
+</html>
