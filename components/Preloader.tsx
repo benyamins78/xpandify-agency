@@ -7,7 +7,6 @@ export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Exact timing to match the slow, deliberate luxury feel
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2800);
@@ -22,12 +21,11 @@ export default function Preloader() {
           exit={{ opacity: 0, filter: "blur(10px)" }}
           transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Extremely subtle ambient glow for depth */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-xpandify-gold/5 rounded-full blur-[60px] pointer-events-none" />
           
           <svg
-            width="80"
-            height="80"
+            width="160" 
+            height="160"
             viewBox="0 0 100 100"
             className="relative z-10 overflow-visible"
           >
@@ -35,17 +33,17 @@ export default function Preloader() {
             <motion.line 
               x1="20" y1="20" x2="80" y2="80" 
               stroke="#1f493d" 
-              strokeWidth="1" // Ultra thin, sharp line
-              strokeLinecap="square" // Square caps look more architectural
+              strokeWidth="2" 
+              strokeLinecap="square"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: [0, 1, 1], opacity: [0, 1, 1] }}
-              transition={{ duration: 2.4, times: [0, 0.6, 1], ease: [0.76, 0, 0.24, 1] }} // Slow ease out
+              transition={{ duration: 2.4, times: [0, 0.6, 1], ease: [0.76, 0, 0.24, 1] }} 
             />
             {/* Second Line (Gold) */}
             <motion.line 
               x1="20" y1="80" x2="80" y2="20" 
               stroke="#D4AF37" 
-              strokeWidth="1" 
+              strokeWidth="2" 
               strokeLinecap="square"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: [0, 1, 1], opacity: [0, 1, 1] }}
