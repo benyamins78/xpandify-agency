@@ -1,16 +1,12 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent, AnimatePresence, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent as ReactMouseEvent, useState, useEffect } from "react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 import ServicesAccordion from "../components/ServicesAccordion";
 import Link from "next/link";
 
 export default function Home() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const [isHovering, setIsHovering] = useState(false);
-  
   const [showTopBtn, setShowTopBtn] = useState(false);
   const { scrollY } = useScroll();
 
@@ -26,19 +22,12 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: ReactMouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   return (
     <div className="relative bg-xpandify-white selection:bg-xpandify-gold selection:text-xpandify-white">
       
-      {/* Interactive Back to Top Button */}
       <AnimatePresence>
         {showTopBtn && (
           <motion.button
@@ -55,81 +44,65 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* 1. HERO SECTION */}
-      <main 
-        id="hero" 
-        className="relative flex flex-col min-h-screen overflow-hidden cursor-default group"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
+      {/* 1. HERO SECTION - Architectural Glassmorphism */}
+      <main id="hero" className="relative flex flex-col min-h-screen overflow-hidden cursor-default bg-xpandify-white">
         
-        {/* Animated Background Orbs for Luxury Depth - Fixed Visibility */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           {/* Gold Orb */}
-           <motion.div 
-             animate={{ 
-               scale: [1, 1.1, 1],
-               x: [0, 60, 0],
-               y: [0, -40, 0]
-             }}
-             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-             className="absolute top-10 left-[-10%] md:left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-xpandify-gold/20 rounded-full blur-[90px] mix-blend-multiply"
-           />
-           {/* Green Orb */}
-           <motion.div 
-             animate={{ 
-               scale: [1, 1.2, 1],
-               x: [0, -50, 0],
-               y: [0, 50, 0]
-             }}
-             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-             className="absolute bottom-10 right-[-10%] md:right-[10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-xpandify-green/15 rounded-full blur-[100px] mix-blend-multiply"
-           />
+        {/* Crisp Architectural Background Grid (No Muddy Colors) */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04] md:opacity-[0.06]">
+           {/* Vertical Lines */}
+           <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
+           <div className="absolute top-0 left-3/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
+           {/* Horizontal Lines */}
+           <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-green to-transparent" />
+           <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-green to-transparent" />
         </div>
-
-        {/* Interactive Mouse Spotlight (Desktop only) */}
-        <motion.div
-          className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-700 hidden md:block mix-blend-overlay"
-          style={{
-            background: useMotionTemplate`radial-gradient(500px circle at ${mouseX}px ${mouseY}px, rgba(212,175,55,0.15), transparent 80%)`,
-            opacity: isHovering ? 1 : 0,
-          }}
-        />
 
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navigation/>
 
-          <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-5xl mx-auto px-6 md:px-12 pt-20">
-            <div className="flex flex-col items-center">
+          <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-6xl mx-auto px-6 md:px-12 pt-20">
+            
+            {/* Massive Luxury Glassmorphism Slab */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 2.5 }}
+              whileHover={{ y: -5, transition: { duration: 0.4, ease: "easeOut" } }}
+              className="relative w-full max-w-4xl p-10 md:p-20 rounded-[2.5rem] border border-xpandify-green/10 bg-xpandify-white/40 backdrop-blur-2xl shadow-[0_20px_80px_-20px_rgba(31,73,61,0.15)] overflow-hidden"
+            >
+              {/* Subtle internal gold highlight for the top edge of the glass */}
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold/40 to-transparent" />
               
-              <motion.div className="mb-8 px-6 py-2 rounded-full border border-xpandify-green/10 bg-xpandify-white/60 backdrop-blur-md shadow-[0_8px_32px_rgba(31,73,61,0.04)] flex items-center gap-3 relative overflow-hidden">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-xpandify-gold opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-xpandify-gold"></span>
-                </span>
-                <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-xpandify-green/80">
-                  Atelier Digital
-                </span>
-              </motion.div>
+              <div className="flex flex-col items-center relative z-10">
+                <motion.div className="mb-8 px-6 py-2 rounded-full border border-xpandify-green/10 bg-xpandify-white/80 backdrop-blur-md flex items-center gap-3">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-xpandify-gold opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-xpandify-gold"></span>
+                  </span>
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-xpandify-green/80">
+                    Atelier Digital
+                  </span>
+                </motion.div>
 
-              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-xpandify-green leading-[1.1] tracking-tight mb-8 mt-4 flex flex-wrap justify-center gap-x-4">
-                <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6, duration: 0.8 }}>
-                  Digital
-                </motion.span>
-                <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.7, duration: 0.8 }}
-                  className="font-serif italic text-xpandify-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-xpandify-green leading-[1.1] tracking-tight mb-8 mt-4 flex flex-wrap justify-center gap-x-4">
+                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6, duration: 0.8 }}>
+                    Digital
+                  </motion.span>
+                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.7, duration: 0.8 }}
+                    className="font-serif italic text-xpandify-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]"
+                  >
+                    Excellence
+                  </motion.span>
+                </h2>
+                
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.0, duration: 1 }}
+                  className="text-sm md:text-base lg:text-lg text-xpandify-green/80 font-medium max-w-xl leading-relaxed tracking-wide px-4"
                 >
-                  Excellence
-                </motion.span>
-              </h2>
-              
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.0, duration: 1 }}
-                className="text-sm md:text-base lg:text-lg text-xpandify-green/80 font-medium mb-12 max-w-xl leading-relaxed tracking-wide px-4"
-              >
-                We engineer uncompromising, high-performance digital experiences for forward-thinking brands worldwide.
-              </motion.p>
-            </div>
+                  We engineer uncompromising, high-performance digital experiences for forward-thinking brands worldwide.
+                </motion.p>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </main>
