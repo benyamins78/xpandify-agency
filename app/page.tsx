@@ -44,15 +44,18 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* 1. HERO SECTION - Sharp Architectural Glassmorphism */}
-      <main id="hero" className="relative flex flex-col min-h-screen overflow-hidden cursor-default bg-xpandify-white">
+      {/* 1. HERO SECTION - Inverted Dark Green Hero with White Glassmorphism */}
+      <main id="hero" className="relative flex flex-col min-h-screen overflow-hidden cursor-default bg-xpandify-green text-xpandify-white">
         
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04] md:opacity-[0.06]">
-           <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
-           <div className="absolute top-0 left-3/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
-           <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-green to-transparent" />
-           <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-green to-transparent" />
+        {/* Subtle Luxury Glows & Architectural Lines */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.08]">
+           <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-gold to-transparent" />
+           <div className="absolute top-0 left-3/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-gold to-transparent" />
+           <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold to-transparent" />
+           <div className="absolute top-2/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold to-transparent" />
         </div>
+
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-xpandify-gold/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navigation/>
@@ -64,40 +67,40 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 2.5 }}
               whileHover={{ y: -5, transition: { duration: 0.4, ease: "easeOut" } }}
-              className="relative w-full max-w-4xl p-10 md:p-20 rounded-none border border-xpandify-green/10 bg-xpandify-white/40 backdrop-blur-2xl shadow-[0_20px_80px_-20px_rgba(31,73,61,0.15)] overflow-hidden"
+              className="relative w-full max-w-4xl p-10 md:p-20 rounded-none border border-xpandify-white/10 bg-xpandify-white/[0.04] backdrop-blur-2xl shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               {/* Sharp Architectural Corner Accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-xpandify-gold/60" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-xpandify-gold/60" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-xpandify-gold/60" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-xpandify-gold/60" />
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-xpandify-gold/80" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-xpandify-gold/80" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-xpandify-gold/80" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-xpandify-gold/80" />
               
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold/40 to-transparent" />
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold/60 to-transparent" />
               
               <div className="flex flex-col items-center relative z-10">
-                <motion.div className="mb-8 px-6 py-2 rounded-none border border-xpandify-green/10 bg-xpandify-white/80 backdrop-blur-md flex items-center gap-3">
+                <motion.div className="mb-8 px-6 py-2 rounded-none border border-xpandify-white/10 bg-xpandify-white/[0.08] backdrop-blur-md flex items-center gap-3">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-xpandify-gold opacity-75"></span>
                     <span className="relative inline-flex rounded-none h-1.5 w-1.5 bg-xpandify-gold"></span>
                   </span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-xpandify-green/80">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-xpandify-white/90">
                     Atelier Digital
                   </span>
                 </motion.div>
 
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-xpandify-green leading-[1.1] tracking-tight mb-8 mt-4 flex flex-wrap justify-center gap-x-4">
+                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-xpandify-white leading-[1.1] tracking-tight mb-8 mt-4 flex flex-wrap justify-center gap-x-4">
                   <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6, duration: 0.8 }}>
                     Digital
                   </motion.span>
                   <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.7, duration: 0.8 }}
-                    className="font-serif italic text-xpandify-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]"
+                    className="font-serif italic text-xpandify-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
                   >
                     Excellence
                   </motion.span>
                 </h2>
                 
                 <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.0, duration: 1 }}
-                  className="text-sm md:text-base lg:text-lg text-xpandify-green/80 font-medium max-w-xl leading-relaxed tracking-wide px-4"
+                  className="text-sm md:text-base lg:text-lg text-xpandify-white/80 font-medium max-w-xl leading-relaxed tracking-wide px-4"
                 >
                   We engineer uncompromising, high-performance digital experiences for forward-thinking brands worldwide.
                 </motion.p>
