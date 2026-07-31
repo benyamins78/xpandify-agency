@@ -1,29 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHomePage = pathname === '/';
+
   const { scrollY } = useScroll();
 
+  // Bulletproof Framer Motion scroll tracking
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() || 0;
     
-    // Check if we've scrolled past the very top
-    if (latest > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+    // Toggle glass background
+    setScrolled(latest > 50);
 
-    // Hide when scrolling down, show when scrolling up
-    if (latest > previous && latest > 150 && !isOpen) {
-      setHidden(true);
-    } else {
+    if (latest < previous && latest > 50) {
+      // User is scrolling UP - show the header
       setHidden(false);
+    } else if (latest > previous && latest > 150 && !isOpen) {
+      // User is scrolling DOWN past 150px - hide the header
+      setHidden(true);
     }
   });
 
@@ -32,18 +37,27 @@ export default function Navigation() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setIsOpen(false);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    
+    if (isHomePage) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(`/#${targetId}`);
     }
   };
 
   const menuItems = [
+    { title: "Agency", id: "agency" },
     { title: "Expertise", id: "expertise" },
     { title: "Work", id: "work" },
-    { title: "Agency", id: "contact" }, 
     { title: "Contact", id: "contact" }
   ];
+
+  const headerBackground = (scrolled || !isHomePage) 
+    ? 'bg-xpandify-green/95 backdrop-blur-xl border-b border-xpandify-white/10 shadow-2xl' 
+    : 'bg-transparent border-b border-transparent';
 
   return (
     <>
@@ -51,15 +65,11 @@ export default function Navigation() {
         variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className={`fixed top-0 left-0 right-0 p-6 md:px-12 lg:px-24 flex justify-between items-center z-[60] transition-all duration-500 ${
-          scrolled 
-            ? 'bg-xpandify-green/95 backdrop-blur-xl border-b border-xpandify-white/10 shadow-2xl' 
-            : 'bg-transparent border-b border-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 p-6 md:px-12 lg:px-24 flex justify-between items-center z-[60] transition-all duration-500 ${headerBackground}`}
       >
-        <div className="relative z-50 text-xl font-medium text-xpandify-white tracking-[0.3em] uppercase cursor-pointer" onClick={(e) => handleNavClick(e as any, "hero")}>
+        <Link href="/" onClick={() => setIsOpen(false)} className="relative z-50 text-xl font-medium text-xpandify-white tracking-[0.3em] uppercase cursor-pointer">
           Xpandify<span className="text-xpandify-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]">.</span>
-        </div>
+        </Link>
         
         <button onClick={toggleMenu} className="relative z-[60] flex flex-col justify-center items-center w-10 h-10 md:hidden group">
           <motion.span 
