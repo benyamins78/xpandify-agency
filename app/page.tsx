@@ -26,7 +26,7 @@ export default function Home() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="relative selection:bg-xpandify-gold selection:text-xpandify-white">
+    <div className="relative bg-xpandify-white selection:bg-xpandify-gold selection:text-xpandify-white">
       
       <AnimatePresence>
         {showTopBtn && (
@@ -35,42 +35,19 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-[70] w-12 h-12 bg-xpandify-green border border-xpandify-gold/30 rounded-full flex items-center justify-center text-xpandify-gold shadow-lg hover:bg-xpandify-gold hover:text-xpandify-green transition-colors duration-300"
+            className="fixed bottom-8 right-8 z-[70] w-12 h-12 bg-xpandify-green border border-xpandify-gold/30 rounded-none flex items-center justify-center text-xpandify-gold shadow-lg hover:bg-xpandify-gold hover:text-xpandify-green transition-colors duration-300"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
               <path d="M12 19V5M5 12l7-7 7 7"/>
             </svg>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* 1. HERO SECTION - Upgraded Glassmorphism */}
-      <main id="hero" className="relative flex flex-col min-h-screen overflow-hidden cursor-default bg-[#fcfcfc]">
+      {/* 1. HERO SECTION - Sharp Architectural Glassmorphism */}
+      <main id="hero" className="relative flex flex-col min-h-screen overflow-hidden cursor-default bg-xpandify-white">
         
-        {/* Pearlescent Background Wash */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-xpandify-gold/5 via-transparent to-xpandify-green/5 pointer-events-none" />
-
-        {/* Sharp Architectural Elements behind the glass to create distortion */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
-           {/* Slow rotating fine dashed gold ring */}
-           <motion.div
-             animate={{ rotate: 360 }}
-             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-             className="w-[800px] h-[800px] rounded-full border border-dashed border-xpandify-gold/20 absolute"
-           />
-           {/* Secondary counter-rotating architectural ring */}
-           <motion.div
-             animate={{ rotate: -360 }}
-             transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-             className="w-[600px] h-[600px] rounded-full border border-xpandify-green/10 absolute"
-           />
-           {/* Vibrant geometric contrasting color patches behind glass */}
-           <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-xpandify-gold/15 rounded-full blur-3xl" />
-           <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-xpandify-green/15 rounded-full blur-3xl" />
-        </div>
-
-        {/* Crisp Architectural Grid */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04] md:opacity-[0.06]">
            <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
            <div className="absolute top-0 left-3/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xpandify-green to-transparent" />
            <div className="absolute top-1/3 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-green to-transparent" />
@@ -82,23 +59,26 @@ export default function Home() {
 
           <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-6xl mx-auto px-6 md:px-12 pt-20">
             
-            {/* Massive Luxury Glassmorphism Slab with enhanced frosting & border highlights */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 2.5 }}
               whileHover={{ y: -5, transition: { duration: 0.4, ease: "easeOut" } }}
-              className="relative w-full max-w-4xl p-10 md:p-20 rounded-[2.5rem] border border-white/60 bg-white/30 backdrop-blur-3xl shadow-[0_30px_100px_-20px_rgba(31,73,61,0.2)] overflow-hidden"
+              className="relative w-full max-w-4xl p-10 md:p-20 rounded-none border border-xpandify-green/10 bg-xpandify-white/40 backdrop-blur-2xl shadow-[0_20px_80px_-20px_rgba(31,73,61,0.15)] overflow-hidden"
             >
-              {/* Internal layered glass highlights */}
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold/50 to-transparent" />
+              {/* Sharp Architectural Corner Accents */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-xpandify-gold/60" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-xpandify-gold/60" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-xpandify-gold/60" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-xpandify-gold/60" />
+              
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-xpandify-gold/40 to-transparent" />
               
               <div className="flex flex-col items-center relative z-10">
-                <motion.div className="mb-8 px-6 py-2 rounded-full border border-xpandify-green/10 bg-white/70 backdrop-blur-md flex items-center gap-3 shadow-sm">
+                <motion.div className="mb-8 px-6 py-2 rounded-none border border-xpandify-green/10 bg-xpandify-white/80 backdrop-blur-md flex items-center gap-3">
                   <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-xpandify-gold opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-xpandify-gold"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-xpandify-gold opacity-75"></span>
+                    <span className="relative inline-flex rounded-none h-1.5 w-1.5 bg-xpandify-gold"></span>
                   </span>
                   <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-xpandify-green/80">
                     Atelier Digital
@@ -106,17 +86,17 @@ export default function Home() {
                 </motion.div>
 
                 <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-xpandify-green leading-[1.1] tracking-tight mb-8 mt-4 flex flex-wrap justify-center gap-x-4">
-                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6, duration: 0.8 }}>
                     Digital
                   </motion.span>
-                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}
-                    className="font-serif italic text-xpandify-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+                  <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.7, duration: 0.8 }}
+                    className="font-serif italic text-xpandify-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]"
                   >
                     Excellence
                   </motion.span>
                 </h2>
                 
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 1 }}
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 3.0, duration: 1 }}
                   className="text-sm md:text-base lg:text-lg text-xpandify-green/80 font-medium max-w-xl leading-relaxed tracking-wide px-4"
                 >
                   We engineer uncompromising, high-performance digital experiences for forward-thinking brands worldwide.
